@@ -2,7 +2,4 @@
 .ruff_cache
 .venv
 alembic
-app.__pycache__
-app.model.__pycache__
-app.controller.__pycache__
-app.services.__pycache__
+*.pyc
