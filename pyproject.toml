@@ -6,8 +6,18 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.16.4",
+    "asyncpg>=0.30.0",
     "fastapi[standard]>=0.116.1",
     "psycopg2-binary>=2.9.10",
+    "pydantic>=2.11.7",
     "pydantic-settings>=2.10.1",
     "sqlalchemy>=2.0.42",
+    "uvicorn>=0.35.0",
+]
+
+[tool.ruff]
+exclude = ["alembic/versions"]
+
+extend-ignore = [
+    "E711",  # ✅ Comparison to None should use 'is' or 'is not'
 ]
