@@ -28,7 +28,7 @@ async def service_get_user_by_user_name(user_name: str, db: AsyncSession):
 
 
 async def service_get_user_privileges(db: AsyncSession):
-    result = await db.execute(select(UserPrivilege).where(User.deleted_at == None))
+    result = await db.execute(select(UserPrivilege).where(UserPrivilege.deleted_at == None))
     return result.scalars().all()
 
 

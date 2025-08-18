@@ -16,3 +16,4 @@
 2025-08-18 09:39:04,924 - DEBUG - sub is None!
 2025-08-18 09:39:04,924 - DEBUG - Attempting to decode token
 2025-08-18 09:39:05,040 - DEBUG - Current user: 1, test
+2025-08-18 06:22:20,129 - INFO - User 3 is trying to access users list

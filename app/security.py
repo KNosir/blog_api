@@ -85,7 +85,7 @@ async def authenticate_user(db: AsyncSession, username: str, password: str):
     return user
 
 
-async def check_admin_by_id(db: AsyncSession, id: int) -> bool:
+async def check_admin_by_id(id: int, db: AsyncSession) -> bool:
     condition = and_(
         User.id == id,
         User.user_privilege_id == 1,
