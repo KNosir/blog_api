@@ -5,11 +5,12 @@ from typing import Optional
 
 class UserCreate(BaseModel):
     user_name: str
+    password: str
     user_privilege_id: int
 
 
 class User(BaseModel):
-    id: int
+    id: Optional[int] = None
     user_name: str
     is_active: bool
     user_privilege_id: int

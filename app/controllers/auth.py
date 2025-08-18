@@ -1,20 +1,26 @@
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from app.models.users import User
-from app.schemas.users import UserGet
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.security import create_access_token, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES
 from fastapi import HTTPException, status
+from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import timedelta
+
 from app.database import get_db
+from app.schemas.users import UserCreate, User
+from app.models.users import User as UserORM
+from app.security import create_access_token, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES
+from app.services.users import service_get_user_by_user_name, service_post_user
+# from app.models.users import User
 
 
 router = APIRouter()
 
 
-@router.post("/auth/signup")
-async def signup():
-    pass
+@router.post("/auth/signup", response_model=User)
+async def signup(user: UserCreate, db: AsyncSession = Depends(get_db)):
+    existing_user = await service_get_user_by_user_name(user.user_name, db)
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Username already exists")
+    return await service_post_user(UserORM(**user.model_dump()), db)
 
 
 @router.post("/auth/login")

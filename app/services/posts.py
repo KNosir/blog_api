@@ -15,8 +15,8 @@ async def service_get_posts_by_id(id: int, db: AsyncSession):
     return result.scalars().all()
 
 
-async def service_post_posts(post: Post, db: AsyncSession):
-    post.user_id = 1
+async def service_post_posts(user_id: int, post: Post, db: AsyncSession):
+    post.user_id = user_id
     db.add(post)
     await db.commit()
     await db.refresh(post)
@@ -40,7 +40,7 @@ async def service_put_posts(id: int, post: Post, db: AsyncSession):
 
 
 async def service_delete_posts(id: int, db: AsyncSession):
-    result = await db.execute(select(Post).where(Post.id == id))
+    result = await db.execute(select(Post).where(and_(Post.id == id, Post.deleted_at == None)))
     result = result.scalar_one_or_none()
 
     if not result:

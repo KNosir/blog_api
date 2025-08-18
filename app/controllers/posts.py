@@ -1,14 +1,15 @@
-from fastapi import Depends, APIRouter
+from fastapi import Depends, APIRouter #, HTTPException
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
-from app.schemas.posts import PostCreate, PostGet, PostPut
+from app.schemas.posts import PostCreate,  PostPut, Post as PostGet
 from app.services.posts import service_get_posts, service_get_posts_by_id, service_post_posts, service_delete_posts, service_put_posts
 from app.models.posts import Post
 from app.models.users import User
 from app.services.auth import get_current_user
-from app.utils import logger
+# from app.utils import logger
+# from app.security import check_admin_by_id
 
 
 router = APIRouter()
@@ -33,8 +34,7 @@ async def route_get_posts_by_id(id: int, db: AsyncSession = Depends(get_db)):
 async def route_post_posts(post: PostCreate,
                            db: AsyncSession = Depends(get_db),
                            current: User = Depends(get_current_user)):  # ------
-    logger.debug(f"Current user: {current.id}, {current.user_name}")
-    return await service_post_posts(Post(**post.model_dump()), db)
+    return await service_post_posts(int(current.id), Post(**post.model_dump()), db)
 
 
 @router.put("/posts/{id}", response_model=PostGet)

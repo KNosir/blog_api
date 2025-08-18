@@ -83,3 +83,15 @@ async def authenticate_user(db: AsyncSession, username: str, password: str):
         return False
 
     return user
+
+
+async def check_admin_by_id(db: AsyncSession, id: int) -> bool:
+    condition = and_(
+        User.id == id,
+        User.user_privilege_id == 1,
+        User.deleted_at.is_(None),
+        User.is_active.is_(True)
+    )
+
+    result = await db.execute(select(User).where(condition))
+    return result.scalars().first() is not None

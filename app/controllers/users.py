@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from app.schemas.users import UserGet, UserPrivilege
+from app.schemas.users import User as UserGet, UserPrivilege
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.services.users import service_get_users, service_get_user_privileges, service_get_user_by_id
