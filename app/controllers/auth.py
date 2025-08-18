@@ -32,8 +32,3 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 @router.post("/auth/logout")
 async def logout():
     pass
-
-
-@router.get("/users/me/", response_model=UserGet)
-async def read_users_me(current_user: User = Depends()):
-    return current_user
