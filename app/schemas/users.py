@@ -8,7 +8,7 @@ class UserCreate(BaseModel):
     user_privilege_id: int
 
 
-class UserGet(BaseModel):
+class User(BaseModel):
     id: int
     user_name: str
     is_active: bool

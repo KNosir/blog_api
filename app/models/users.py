@@ -7,8 +7,9 @@ from datetime import datetime, timezone
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    user_name = Column(String)
+    id = Column(Integer, primary_key=True)
+    user_name = Column(String, unique=True)
+    password = Column(String)
     is_active = Column(Boolean, default=True)
     user_privilege_id = Column(Integer, ForeignKey(
         "user_privileges.id", ondelete="SET NULL"), nullable=True)

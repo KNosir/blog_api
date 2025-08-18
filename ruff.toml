@@ -1,0 +1,8 @@
+[tool.ruff]
+# Exclude auto-generated migrations
+exclude = ["alembic/versions"]
+
+# Ignore specific rules you don't want Ruff to flag
+extend-ignore = [
+    "E711",  # Comparison to None should use 'is' or 'is not'
+]

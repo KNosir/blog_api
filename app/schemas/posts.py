@@ -9,7 +9,7 @@ class PostCreate(BaseModel):
     description: str
 
 
-class PostGet(BaseModel):
+class Post(BaseModel):
     id: int
     title: str
     description: str
