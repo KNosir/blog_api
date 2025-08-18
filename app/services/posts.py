@@ -23,8 +23,12 @@ async def service_post_posts(user_id: int, post: Post, db: AsyncSession):
     return post
 
 
-async def service_put_posts(id: int, post: Post, db: AsyncSession):
-    conditions = and_(Post.id == id, Post.deleted_at == None)
+async def service_put_posts(id: int, post: Post, db: AsyncSession, user_id: int = 0):
+    if user_id == 0:
+        conditions = and_(Post.id == id, Post.deleted_at == None)
+    else:
+        conditions = and_(Post.id == id, Post.deleted_at ==
+                          None, Post.user_id == user_id)
     result = await db.execute(select(Post).where(conditions))
     result = result.scalar_one_or_none()
 
@@ -39,8 +43,16 @@ async def service_put_posts(id: int, post: Post, db: AsyncSession):
     return result
 
 
-async def service_delete_posts(id: int, db: AsyncSession):
-    result = await db.execute(select(Post).where(and_(Post.id == id, Post.deleted_at == None)))
+async def service_delete_posts(id: int, db: AsyncSession, user_id: int = 0):
+    if user_id == 0:
+        conditions = and_(Post.id == id,
+                          Post.deleted_at == None)
+    else:
+        conditions = and_(Post.id == id,
+                          Post.deleted_at == None,
+                          Post.user_id == user_id)
+
+    result = await db.execute(select(Post).where(conditions))
     result = result.scalar_one_or_none()
 
     if not result:
