@@ -1,0 +1,8 @@
+.env
+.ruff_cache
+.venv
+alembic
+
+**/__pycache__/
+*.pyc
+*.pyo

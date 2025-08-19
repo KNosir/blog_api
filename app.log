@@ -1,0 +1,19 @@
+2025-08-18 09:35:35,423 - DEBUG - Hello
+2025-08-18 09:35:37,982 - DEBUG - Hello
+2025-08-18 09:35:48,547 - DEBUG - This will appear in app.log
+2025-08-18 09:35:55,182 - DEBUG - This will appear in app.log
+2025-08-18 09:36:26,242 - DEBUG - This will appear in app.log
+2025-08-18 09:36:28,127 - DEBUG - This will appear in app.log
+2025-08-18 09:36:31,879 - DEBUG - This will appear in app.log
+2025-08-18 09:36:36,127 - DEBUG - This will appear in app.log
+2025-08-18 09:36:38,406 - DEBUG - This will appear in app.log
+2025-08-18 09:36:41,131 - DEBUG - This will appear in app.log
+2025-08-18 09:37:02,104 - DEBUG - sub is None!
+2025-08-18 09:37:02,104 - DEBUG - Attempting to decode token
+2025-08-18 09:38:24,161 - DEBUG - sub is None!
+2025-08-18 09:38:24,162 - DEBUG - Attempting to decode token
+2025-08-18 09:38:24,253 - DEBUG - Current user: <app.models.users.User object at 0x0000028B16A0B8F0>
+2025-08-18 09:39:04,924 - DEBUG - sub is None!
+2025-08-18 09:39:04,924 - DEBUG - Attempting to decode token
+2025-08-18 09:39:05,040 - DEBUG - Current user: 1, test
+2025-08-18 06:22:20,129 - INFO - User 3 is trying to access users list

@@ -1,0 +1,2 @@
+exclude = ["alembic/versions"]
+extend-ignore = ["E711"]
