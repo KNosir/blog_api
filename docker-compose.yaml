@@ -1,24 +1,6 @@
 version: "3.8"
 
 services:
-  web:
-    build: .
-    container_name: blog_api
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    depends_on:
-      - postgres
-    command: >
-      bash -c "
-        echo 'Waiting for PostgreSQL...' &&
-        until pg_isready -h postgres -p 5432; do sleep 1; done &&
-        echo 'PostgreSQL ready. Running migrations...' &&       
-        alembic upgrade head &&
-        uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level debug
-      "
-
   postgres:
     image: postgres:15
     container_name: postgres_db
@@ -31,6 +13,25 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  blog_api:
+    build: .
+    container_name: blog_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    command: >
+      bash -c "
+        echo 'Waiting for PostgresSQL...' &&
+        until pg_ready -h postgres -p 5432; do sleep 1; done &&
+        echo 'PostgresSQL ready. Running migrations...' &&       
+        alembic upgrade head &&
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level debug
+      "
+
 
 volumes:
   postgres_data:
