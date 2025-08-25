@@ -27,9 +27,10 @@ services:
       bash -c "
         echo 'Waiting for PostgresSQL...' &&
         until pg_ready -h postgres -p 5432; do sleep 1; done &&
-        echo 'PostgresSQL ready. Running migrations...' &&       
+        echo 'PostgresSQL ready. Running migrations...' &&
+        alembic revision --autogenerate -m "Initial migration" &&
         alembic upgrade head &&
-        uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level debug
+        uvicorn app.main:app --host 0.0.0.0 --port 8000
       "
 
 
