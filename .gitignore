@@ -2,6 +2,7 @@
 .ruff_cache
 .venv
 alembic/versions
+.edea
 
 **/__pycache__/
 *.pyc
