@@ -7,7 +7,9 @@ RUN pip install uv
 
 WORKDIR /app
 
-COPY pyproject.toml ./
+COPY pyproject.toml uv.lock* ./
+
+RUN uv sync --link-mode=copy
 
 RUN uv pip install --system .
 
