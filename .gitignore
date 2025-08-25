@@ -1,7 +1,8 @@
 .env
 .ruff_cache
 .venv
-alembic
+alembic/versions
+.edea
 
 **/__pycache__/
 *.pyc
